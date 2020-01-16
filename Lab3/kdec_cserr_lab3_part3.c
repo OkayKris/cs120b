@@ -1,7 +1,7 @@
 /*	Partner(s) Name & E-mail: Kristian De Castro kdec001@ucr.edu
  *	Christopher Serrano cserr011@ucr.edu
  *	Lab Section: 024
- *	Assignment: Lab 3  Exercise 2
+ *	Assignment: Lab 3  Exercise 3
  *
  *
  *	I acknowledge all content contained herein, excluding template or example
@@ -21,9 +21,12 @@ int main(void)
 	DDRC = 0xFF; PORTC = 0x00; // Configure port B's 8 pins as outputs,
 
 	while(1){
-		unsigned char fuel = PINA & 0x07;
+		unsigned char fuel = PINA & 0x0F;
 		unsigned char light = 0x00;
 		unsigned char lowFuel = 0x00;
+		unsigned char key = PINA & 0x10;
+		unsigned char seated = PINA & 0x20;
+		unsigned char seatbelt = PINA & 0x40;
 
 		if(fuel == 1 || fuel == 2){
 			light = 0x20;
@@ -42,8 +45,11 @@ int main(void)
 		if (fuel == 10 || fuel == 11 || fuel == 12) {
 			light = 0x3E;
 		}
-		if (fuel ==13 || fuel == 14 || fuel == 15) {
+		if (fuel == 13 || fuel == 14 || fuel == 15) {
 			light = 0x3F;
+		}
+		if(key == 0x10 && seated == 0x20 && seatbelt == 0){
+			light = light | 0x80;
 		}
 		PORTC = light | lowFuel;
 	}
