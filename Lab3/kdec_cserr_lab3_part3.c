@@ -27,7 +27,9 @@ int main(void)
 		unsigned char key = PINA & 0x10;
 		unsigned char seated = PINA & 0x20;
 		unsigned char seatbelt = PINA & 0x40;
-
+		if(fuel == 0){
+			lowFuel = 0x40;
+		}
 		if(fuel == 1 || fuel == 2){
 			light = 0x20;
 			lowFuel = 0x40;
