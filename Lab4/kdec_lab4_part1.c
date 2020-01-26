@@ -55,7 +55,6 @@ void TickButton(){
 			break;
 
 		case offR:
-			PORTB = 0x02;
 			break;
 		case onP:
 			PORTB = 0x01;
